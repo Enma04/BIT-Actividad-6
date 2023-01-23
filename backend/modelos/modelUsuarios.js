@@ -43,8 +43,24 @@ usuariosModel.Modificar = function (data, callback) {
         return callback({ state: false, mensaje: "El usuario no existe" });
     }
     else {
+        if (data.name != null && data.name != undefined && data.name != "" && data.name != " ") {
+            datos[posicion].nombre = data.name;
+        }
+        if (data.apellido != null && data.apellido != undefined && data.apellido != "" && data.apellido != " ") {
+            datos[posicion].apellido = data.apellido;
+        }
+        if (data.direccion != null && data.direccion != undefined && data.direccion != "" && data.direccion != " ") {
+            datos[posicion].direccion = data.direccion;
+        }
+        if (data.telefono != null && data.telefono != undefined && data.telefono != "" && data.telefono != " ") {
+            datos[posicion].telefono = data.telefono;
+        }
+        if (data.estadocivil != null && data.estadocivil != undefined && data.estadocivil != "" && data.estadocivil != " ") {
+            datos[posicion].estadocivil = data.estadocivil;
+        }
+        
         datos[posicion].edad = data.edad;
-        return callback({ ubicacion: posicion });
+        return callback({ state:true, mensaje:"Datos actualizados correctamente!", ubicacion: posicion });
     }
     
 } //Fin api UPDATE

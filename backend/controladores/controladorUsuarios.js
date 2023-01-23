@@ -82,8 +82,13 @@ usuariosController.ListarUsuarios = function (peticion, respuesta) {
 usuariosController.Modificar = function (peticion, respuesta) {
 
     let data = {
-        cedula: peticion.body.cedula,
-        edad:   peticion.body.edad,
+        cedula       :peticion.body.cedula,
+        name         :peticion.body.name,
+        apellido     :peticion.body.apellido,
+        edad         :peticion.body.edad,
+        direccion    :peticion.body.direccion,
+        telefono     :peticion.body.telefono,
+        estadocivil  :peticion.body.estadocivil,
     }
 
     //VALIDACIONES
