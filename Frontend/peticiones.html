@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peticiones</title>
+  </head>
+  <body>
+    <script>
+      function Peticion(post, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+          if (this.readyState === 4) {
+            return callback(this.responseText);
+            console.log(this.responseText);
+          }
+        });
+
+        xhr.open(post.tipo, post.host + post.path); //endpoint
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+
+        xhr.send(post.payload);
+      }
+
+      //FUNCION BOTON GUARDAR
+      function Guardar() {
+        let cedula = document.getElementById("cedula").value;
+        let nombre = document.getElementById("name").value;
+        let apellido = document.getElementById("apellido").value;
+        let edad = document.getElementById("edad").value;
+        let direccion = document.getElementById("direccion").value;
+        let telefono = document.getElementById("telefono").value;
+        let estadocivil = document.getElementById("estadocivil").value;
+
+        let data = `cedula=${cedula}&name=${nombre}&apellido=${apellido}&edad=${edad}&direccion=${direccion}&telefono=${telefono}&estadocivil=${estadocivil}`;
+
+        let post = {
+          tipo: "POST",
+          host: "http://localhost:3000",
+          path: "/Cliente/Guardar",
+          payload: data,
+        };
+
+        Peticion(post, function (respuesta) {
+          console.log(respuesta);
+        });
+      } //Fin funcion del boton Guardar
+
+      //FUNCION BOTON LISTAR
+      const Listar = function () {
+        var data = "";
+
+        let post = {
+          tipo: "POST",
+          host: "http://localhost:3000",
+          path: "/Cliente/ListarUsuarios",
+          payload: null,
+        };
+
+        Peticion(post, function (respuesta) {
+          console.log(respuesta);
+        });
+      }; //Fin funcion del boton Listar
+
+      function Modificar() {
+        let cedula = document.getElementById("cedula").value;
+        let nombre = document.getElementById("name").value;
+        let apellido = document.getElementById("apellido").value;
+        let edad = document.getElementById("edad").value;
+        let direccion = document.getElementById("direccion").value;
+        let telefono = document.getElementById("telefono").value;
+        let estadocivil = document.getElementById("estadocivil").value;
+
+        let data = `cedula=${cedula}&name=${nombre}&apellido=${apellido}&edad=${edad}&direccion=${direccion}&telefono=${telefono}&estadocivil=${estadocivil}`;
+
+        let post = {
+          tipo: "POST",
+          host: "http://localhost:3000",
+          path: "/Cliente/Modificar",
+          payload: data,
+        };
+
+        Peticion(post, function (respuesta) {
+          console.log(respuesta);
+        });
+      } //Fin funcion del boton Actualizar
+
+      function Eliminar() {
+        let cedula = document.getElementById("cedula").value;
+        let data = `cedula=${cedula}`;
+
+        let post = {
+          tipo: "POST",
+          host: "http://localhost:3000",
+          path: "/Cliente/Eliminar",
+          payload: data,
+        };
+
+        Peticion(post, function (respuesta) {
+          console.log(respuesta);
+        });
+      } //Fin funcion del boton Eliminar
+    </script>
+
+    <h1>Hola mundo</h1>
+    <div>
+      <input type="text" id="cedula" placeholder="cedula" />
+      <input type="text" id="name" placeholder="name" />
+      <input type="text" id="apellido" placeholder="apellido" />
+      <input type="text" id="edad" placeholder="edad" />
+      <input type="text" id="direccion" placeholder="direccion" />
+      <input type="text" id="telefono" placeholder="telefono" />
+      <input type="text" id="estadocivil" placeholder="estadocivil" />
+
+      <button onclick="Guardar()">Guardar</button>
+      <button onclick="Listar()">Listar</button>
+      <button onclick="Modificar()">Actualizar</button>
+      <button onclick="Eliminar()">Eliminar Usuario</button>
+    </div>
+  </body>
+</html>
